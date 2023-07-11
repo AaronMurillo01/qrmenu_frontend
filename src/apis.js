@@ -37,10 +37,6 @@ export function signIn(username, password) {
           throw new Error(e);
         });
     })
-    .then((json) => {
-      //CALL API successfully
-      toast(JSON.stringify(json), { type: "success" });
-    })
     .catch((e) => {
       //Handle all errors
       toast(e.message, { type: "error" });
