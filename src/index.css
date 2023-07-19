@@ -3,7 +3,7 @@ body {
 }
 
 * {
-  font-family: "Lato", "Helvetica", sans-serif;
+  font-family: "Lato", "Helvetica Neue", sans-serif;
 }
 
 .btn-standard {
@@ -14,4 +14,37 @@ body {
 .btn-standard:hover {
   background-color: #fc285d;
   color: white;
+}
+
+.btn-lightgray {
+  background-color: #f0f3f5;
+  color: black;
+}
+
+.btn-lightgray:hover {
+  background-color: #edeff0;
+  color: black;
+}
+
+.StripeElement {
+  height: 38px;
+  padding: 10px 12px;
+  width: 100%;
+  color: #32325d;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.StripeElement--focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }
