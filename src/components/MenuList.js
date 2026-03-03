@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MenuItem from './MenuItem';
 
+// Place header with logo and name
 const Place = styled.div`
   text-align: center;
   img {
@@ -10,12 +11,14 @@ const Place = styled.div`
   }
 `;
 
+// Wrapper that applies the selected font to all menu text
 const Container = styled.div`
   b, p {
     ${({ font }) => font && `font-family: ${font};` }
   }
 `;
 
+// Full menu view — shows the restaurant info and all available categories/items
 const MenuList = ({ place, shoppingCart = {}, onOrder, font = "", color = "" }) => {
   return (
     <Container font={font}>
@@ -35,12 +38,12 @@ const MenuList = ({ place, shoppingCart = {}, onOrder, font = "", color = "" }) 
             {category.menu_items
               .filter((item) => item.is_available)
               .map((item) => (
-                <MenuItem 
-                  key={item.id} 
-                  item={{  
+                <MenuItem
+                  key={item.id}
+                  item={{
                     ...item,
                     quantity: shoppingCart[item.id]?.quantity,
-                  }} 
+                  }}
                   onOrder={onOrder}
                   color={color}
                 />

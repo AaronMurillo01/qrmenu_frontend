@@ -6,6 +6,7 @@ import { signIn } from '../apis';
 import MainLayout from '../layouts/MainLayout';
 import AuthContext from '../contexts/AuthContext';
 
+// Registration page — new users create an account here
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +14,7 @@ const Register = () => {
   const history = useHistory();
   const auth = useContext(AuthContext);
 
+  // Redirect away if they're already logged in
   useEffect(() => {
     if (auth.token) {
       history.replace('/places');
@@ -30,33 +32,33 @@ const Register = () => {
           <Card>
             <Card.Body>
               <h3 className="text-center">
-                <b>REGISTER</b>
+                <b>Create Account</b>
               </h3>
 
               <Form.Group>
                 <Form.Label>Username</Form.Label>
-                <Form.Control 
-                  type="text" 
-                  placeholder="Enter Username" 
-                  value={username} 
-                  onChange={(e) => setUsername(e.target.value)} 
+                <Form.Control
+                  type="text"
+                  placeholder="Pick a username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
 
               <Form.Group>
                 <Form.Label>Password</Form.Label>
-                <Form.Control 
-                  type="password" 
-                  placeholder="Enter Password" 
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
+                <Form.Control
+                  type="password"
+                  placeholder="Choose a password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
 
               <Button variant="standard" block onClick={onClick} disabled={auth.loading}>
                 {
                   auth.loading ? (
-                    <Spinner 
+                    <Spinner
                       variant="standard"
                       as="span"
                       animation="border"
@@ -65,7 +67,7 @@ const Register = () => {
                       aria-hidden="true"
                     />
                   ) : (
-                    "Register"
+                    "Sign Up"
                   )
                 }
               </Button>

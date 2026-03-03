@@ -11,6 +11,7 @@ import { fetchPlace, updatePlace } from '../apis';
 import MainLayout from '../layouts/MainLayout';
 import MenuList from '../components/MenuList';
 
+// Sidebar panel styling
 const Panel = styled.div`
   background-color: white;
   padding: 20px;
@@ -18,6 +19,7 @@ const Panel = styled.div`
   box-shadow: 1px 1px 10px rgba(0,0,0,0.05);
 `;
 
+// Customize menu appearance — pick a font and accent color with a live preview
 const MenuSettings = () => {
   const [place, setPlace] = useState({});
   const [font, setFont] = useState("");
@@ -43,7 +45,7 @@ const MenuSettings = () => {
     setLoading(true);
     const json = await updatePlace(place.id, { font, color }, auth.token);
     if (json) {
-      toast("New settings is updated", {type: "success"});
+      toast("Settings saved!", {type: "success"});
       setPlace(json);
       setLoading(false);
     }
@@ -63,7 +65,7 @@ const MenuSettings = () => {
       </div>
 
       <Row>
-        {/* LEFT SIDE */}
+        {/* Controls: font picker and color picker */}
         <Col md={4}>
           <Panel>
             <Form.Group>
@@ -76,7 +78,7 @@ const MenuSettings = () => {
                 <option>Indie Flower</option>
               </Form.Control>
             </Form.Group>
-            
+
             <Form.Group>
               <Form.Label>Color</Form.Label>
               <ChromePicker
@@ -88,12 +90,12 @@ const MenuSettings = () => {
             </Form.Group>
 
             <Button className="mt-4" variant="standard" block onClick={onUpdatePlace} disabled={loading}>
-              Save Setings
+              Save Settings
             </Button>
           </Panel>
         </Col>
 
-        {/* RIGHT SIDE */}
+        {/* Live preview of the menu with the selected font and color */}
         <Col md={8}>
           <MenuList place={place} font={font} color={color} onOrder={() => []} />
         </Col>

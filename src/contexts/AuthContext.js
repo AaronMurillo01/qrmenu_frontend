@@ -4,6 +4,7 @@ import {signIn as signInApi, register as registerApi} from '../apis';
 
 const AuthContext = createContext();
 
+// Provides auth state (token, loading) and actions (signIn, signOut, register) to the whole app
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [loading, setLoading] = useState(false);
@@ -11,7 +12,6 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (username, password, callback) => {
     setLoading(true);
     const response = await signInApi(username, password);
-    console.log("response", response);
 
     if (response && response.auth_token) {
       localStorage.setItem("token", response.auth_token);
@@ -48,4 +48,3 @@ export const AuthProvider = ({ children }) => {
 };
 
 export default AuthContext;
-

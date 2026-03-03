@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 import { createPaymentIntent } from '../apis';
 import AuthContext from '../contexts/AuthContext';
 
+// Handles the Stripe card input and payment submission
 const PaymentForm = ({ amount, items, onDone, color }) => {
   const [loading, setLoading] = useState(false);
 
@@ -41,7 +42,7 @@ const PaymentForm = ({ amount, items, onDone, color }) => {
       }, auth.token);
 
       if (json?.success) {
-        toast(`Your order #${json.order} is processing`, {type: "success"});
+        toast(`Order #${json.order} placed! We're on it.`, {type: "success"});
         onDone();
         setLoading(false);
       } else if (json?.error) {
@@ -55,12 +56,13 @@ const PaymentForm = ({ amount, items, onDone, color }) => {
     <Form onSubmit={onSubmit}>
       <CardElement options={{ hidePostalCode: true }} />
       <Button variant="standard" style={{ backgroundColor: color }} className="mt-4" block type="submit" disabled={loading}>
-        {loading ? "Processing..." : "Pay"}
+        {loading ? "Placing order..." : "Pay"}
       </Button>
     </Form>
   );
 };
 
+// Wrap PaymentForm in Stripe's Elements provider
 const stripePromise = loadStripe('pk_test_51MvZyLEUP5DwlQwsphTuRd99moQ0U1Eo19LA3YTwL5SYlQm16ygMCeCYWmZjU4V10OcmhmDVuhnYzx5gofEE4FAV002KdCGsxi');
 
 const StripeContext = (props) => (

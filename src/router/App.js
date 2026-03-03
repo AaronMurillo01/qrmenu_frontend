@@ -14,11 +14,13 @@ import Menu from '../pages/Menu';
 import Orders from '../pages/Orders';
 import MenuSettings from '../pages/MenuSettings';
 
+// Root component — sets up auth context, routing, and toast notifications
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Switch>
+          {/* Public routes */}
           <Route exact path='/'>
             <Home/>
           </Route>
@@ -32,6 +34,7 @@ function App() {
             <Menu/>
           </Route>
 
+          {/* Protected routes — redirect to login if no token */}
           <PrivateRoute exact path='/places/:id'>
             <Place/>
           </PrivateRoute>

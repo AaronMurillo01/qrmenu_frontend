@@ -7,12 +7,12 @@ import { useParams, useHistory } from 'react-router-dom';
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 
-import { 
-  fetchPlace, 
-  removePlace, 
-  removeCategory, 
-  removeMenuItem, 
-  updatePlace 
+import {
+  fetchPlace,
+  removePlace,
+  removeCategory,
+  removeMenuItem,
+  updatePlace
 } from '../apis';
 import AuthContext from '../contexts/AuthContext';
 import MainLayout from '../layouts/MainLayout';
@@ -20,6 +20,7 @@ import MenuItemForm from '../containers/MenuItemForm';
 import MenuItem from '../components/MenuItem';
 import QRCodeModal from '../components/QRCodeModal';
 
+// White card panel used for the sidebar form
 const Panel = styled.div`
   background-color: white;
   padding: 20px;
@@ -27,6 +28,7 @@ const Panel = styled.div`
   box-shadow: 1px 1px 10px rgba(0,0,0,0.05);
 `;
 
+// Single place detail page — manage menu items, categories, QR codes, and orders
 const Place = () => {
   const [place, setPlace] = useState({});
   const [menuItemFormShow, setMenuItemFormShow] = useState(false);
@@ -52,27 +54,29 @@ const Place = () => {
     }
   };
 
+  // Confirm before deleting — sends user back to the places list on success
   const onRemovePlace = () => {
-    const c = window.confirm("Are you sure?");
+    const c = window.confirm("Delete this place? This can't be undone.");
     if (c) {
       removePlace(params.id, auth.token).then(onBack);
     }
   };
 
   const onRemoveCategory = (id) => {
-    const c = window.confirm("Are you sure?");
+    const c = window.confirm("Remove this category and all its items?");
     if (c) {
       removeCategory(id, auth.token).then(onFetchPlace);
     }
   };
 
   const onRemoveMenuItem = (id) => {
-    const c = window.confirm("Are you sure?");
+    const c = window.confirm("Remove this menu item?");
     if (c) {
       removeMenuItem(id, auth.token).then(onFetchPlace);
     }
   };
 
+  // Update number of tables (used by the QR code modal's +/- buttons)
   const onUpdatePlace = (tables) => {
     updatePlace(place.id, { number_of_tables: tables }, auth.token).then(
       (json) => {
@@ -92,6 +96,7 @@ const Place = () => {
       <Row>
         <Col lg={12}>
           <div className="mb-4">
+            {/* Top bar: back button, place name, delete */}
             <div className="d-flex justify-content-between align-items-center mb-4">
               <Button variant="link" onClick={onBack}>
                 <IoMdArrowBack size={25} color="black" />
@@ -103,6 +108,7 @@ const Place = () => {
               </Button>
             </div>
 
+            {/* Quick action icons: QR codes, orders, settings */}
             <Button variant="link" onClick={showQRModal}>
               <AiOutlineQrcode size={25} />
             </Button>
@@ -115,12 +121,14 @@ const Place = () => {
           </div>
         </Col>
 
+        {/* Left sidebar: form to add new menu items */}
         <Col md={4}>
           <Panel>
             <MenuItemForm place={place} onDone={onFetchPlace} />
           </Panel>
         </Col>
 
+        {/* Right side: all categories and their menu items */}
         <Col md={8}>
           {place?.categories?.map((category) => (
             <div key={category.id} className="mb-5">
@@ -133,9 +141,9 @@ const Place = () => {
                 </Button>
               </div>
               {category.menu_items.map((item) => (
-                <MenuItem 
-                  key={item.id} 
-                  item={item} 
+                <MenuItem
+                  key={item.id}
+                  item={item}
                   onEdit={() => {
                     setSelectedItem(item);
                     showModal()
@@ -147,11 +155,12 @@ const Place = () => {
           ))}
         </Col>
       </Row>
-    
+
+      {/* Edit modal — pops up when clicking the edit icon on a menu item */}
       <Modal show={menuItemFormShow} onHide={hideModal} centered>
         <Modal.Body>
-          <h4 className="text-center">Menu Item</h4>
-          <MenuItemForm 
+          <h4 className="text-center">Edit Menu Item</h4>
+          <MenuItemForm
             place={place}
             onDone={() => {
               onFetchPlace();
@@ -162,11 +171,11 @@ const Place = () => {
         </Modal.Body>
       </Modal>
 
-      <QRCodeModal 
-        show={qrCode} 
-        onHide={hideQRModal} 
-        place={place} 
-        centered 
+      <QRCodeModal
+        show={qrCode}
+        onHide={hideQRModal}
+        place={place}
+        centered
         onUpdatePlace={onUpdatePlace}
       />
     </MainLayout>

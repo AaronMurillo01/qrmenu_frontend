@@ -3,12 +3,13 @@ import { Card } from 'react-bootstrap';
 import OperationButton from './OperationButton';
 import PaymentForm from '../containers/PaymentForm';
 
+// Cart summary — lists selected items with +/- controls and a Stripe payment form
 const ShoppingCart = ({ items, onAdd, onRemove, onPaymentDone, color }) => {
   const totalPrice = useMemo(
     () => items.map((i) => i.quantity * i.price).reduce((a,b) => a + b, 0),
     [items]
   );
-  
+
   return (
     <>
       <h3 className="text-center mb-4">

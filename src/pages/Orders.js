@@ -8,6 +8,7 @@ import AuthContext from '../contexts/AuthContext';
 import MainLayout from '../layouts/MainLayout';
 import Order from '../components/Order';
 
+// Live orders feed — polls every 5 seconds so new orders show up automatically
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const params = useParams();
@@ -19,7 +20,6 @@ const Orders = () => {
   const onFetchOrders = async () => {
     const json = await fetchOrders(params.id, auth.token);
     if (json) {
-      console.log(json);
       setOrders(json);
     }
   }
@@ -31,6 +31,7 @@ const Orders = () => {
     }
   }
 
+  // Poll for new orders on a 5-second interval
   useEffect(() => {
     onFetchOrders();
     const interval = setInterval(() => {
@@ -45,7 +46,7 @@ const Orders = () => {
         <Button variant="link" onClick={onBack}>
           <IoMdArrowBack size={25} color="black" />
         </Button>
-        <h3 className="mb-0 ml-2 mr-2">My Orders</h3>
+        <h3 className="mb-0 ml-2 mr-2">Orders</h3>
       </div>
 
       <Row className="justify-content-center">

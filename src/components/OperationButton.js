@@ -1,6 +1,7 @@
 import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
+// Small round +/- button used in the shopping cart and table count controls
 const OperationButton = styled(Button)`
   width: 30px;
   height: 30px;

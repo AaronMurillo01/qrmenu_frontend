@@ -9,6 +9,7 @@ import AuthContext from '../contexts/AuthContext';
 import MainLayout from '../layouts/MainLayout';
 import PlaceForm from '../containers/PlaceForm';
 
+// Styled card for each restaurant — scales up on hover for a nice touch
 const Place = styled.div`
   margin-bottom: 20px;
   cursor: pointer;
@@ -28,6 +29,7 @@ const Place = styled.div`
   }
 `;
 
+// Dashed button to create a new place — visually distinct from existing cards
 const AddPlaceButton = styled.div`
   border: 1px dashed gray;
   height: 200px;
@@ -43,6 +45,7 @@ const AddPlaceButton = styled.div`
   }
 `;
 
+// Dashboard showing all of the user's restaurants
 const Places = () => {
   const [places, setPlaces] = useState([]);
   const [show, setShow] = useState(false);
@@ -60,6 +63,7 @@ const Places = () => {
     }
   };
 
+  // Refresh the list and close the modal after adding a place
   const onDone = () => {
     onFetchPlaces();
     onHide();
@@ -73,6 +77,7 @@ const Places = () => {
     <MainLayout>
       <h3>My Places</h3>
 
+      {/* Modal for the "Add New Place" form */}
       <Modal show={show} onHide={onHide} centered>
         <Modal.Body>
           <PlaceForm onDone={onDone} />

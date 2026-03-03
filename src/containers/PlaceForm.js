@@ -6,6 +6,7 @@ import AuthContext from "../contexts/AuthContext";
 
 import ImageDropzone from "./ImageDropzone";
 
+// Simple form for creating a new place (restaurant / cafe / etc.)
 const PlaceForm = ({ onDone }) => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
@@ -23,12 +24,12 @@ const PlaceForm = ({ onDone }) => {
 
   return (
     <div>
-      <h4 className="text-center">Place</h4>
+      <h4 className="text-center">New Place</h4>
       <Form.Group>
         <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter Name"
+          placeholder="e.g. Joe's Diner"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -39,7 +40,7 @@ const PlaceForm = ({ onDone }) => {
         <ImageDropzone value={image} onChange={setImage} />
       </Form.Group>
       <Button variant="standard" block onClick={onClick}>
-        Add
+        Create Place
       </Button>
     </div>
   );

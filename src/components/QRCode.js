@@ -9,6 +9,7 @@ const Container = styled.div`
   position: relative;
 `;
 
+// Semi-transparent overlay with action buttons on top of the QR code
 const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -22,6 +23,7 @@ const Overlay = styled.div`
   }
 `;
 
+// Hidden print layout — large table number + QR code for printing
 const ComponentToPrint = styled.div`
   text-align: center;
   margin-top: 200px;
@@ -36,6 +38,7 @@ const ComponentToPrint = styled.div`
   }
 `;
 
+// QR code for a single table — shows a preview with print and link buttons
 const QRCode = ({ table, placeId }) => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -61,7 +64,7 @@ const QRCode = ({ table, placeId }) => {
       <div style={{ display: "none" }}>
         <ComponentToPrint ref={componentRef}>
           <h1>Table {table}</h1>
-          <h2>Scan for menu</h2>
+          <h2>Scan to see the menu</h2>
           <QRCodeReact value={url} size={500} />
         </ComponentToPrint>
       </div>

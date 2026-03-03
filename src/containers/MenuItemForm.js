@@ -7,10 +7,11 @@ import { addCategory, addMenuItems, updateMenuItem } from '../apis';
 import AuthContext from '../contexts/AuthContext';
 import ImageDropzone from './ImageDropzone';
 
+// Form for creating or editing a menu item (also handles adding new categories)
 const MenuItemForm = ({ place, onDone, item = {} }) => {
   const [categoryName, setCategoryName] = useState("");
   const [categoryFormShow, setCategoryFormShow] = useState(false);
-  
+
   const [category, setCategory] = useState(item.category);
   const [name, setName] = useState(item.name);
   const [price, setPrice] = useState(item.price || 0);
@@ -24,12 +25,12 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
 
   const auth = useContext(AuthContext);
 
+  // Create a new category via the popover form
   const onAddCategory = async () => {
     const json = await addCategory({ name: categoryName, place: place.id }, auth.token);
-    console.log(json);
 
     if (json) {
-      toast(`Category ${json.name} was created.`, { type: "success"});
+      toast(`"${json.name}" category added!`, { type: "success"});
       setCategory(json.id);
       setCategoryName("");
       setCategoryFormShow(false);
@@ -37,6 +38,7 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
     }
   };
 
+  // Submit a brand-new menu item, then reset the form
   const onAddMenuItems = async () => {
     const json = await addMenuItems({
       place: place.id,
@@ -48,10 +50,8 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
       is_available: isAvailable
     }, auth.token);
 
-    console.log(json);
-
     if (json) {
-      toast(`Menu Item ${json.name} was created`, { type: "success" });
+      toast(`"${json.name}" added to the menu!`, { type: "success" });
       setCategory("");
       setName("");
       setPrice(0);
@@ -62,6 +62,7 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
     }
   }
 
+  // Update an existing menu item
   const onUpdateMenuItem = async () => {
     const json = await updateMenuItem(
       item.id,
@@ -78,9 +79,7 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
     );
 
     if (json) {
-      console.log(json);
-
-      toast(`Menu Item ${json.name} was updated`, { type: "success" });
+      toast(`"${json.name}" updated!`, { type: "success" });
       setCategory("");
       setName("");
       setPrice(0)
@@ -93,7 +92,7 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
 
   return (
     <div>
-      {/* CATEGORIES FORM */}
+      {/* Category selector with an inline popover to create new categories */}
       <Form.Group>
         <Form.Label>Category</Form.Label>
         <div className="d-flex align-items-center">
@@ -111,20 +110,20 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
             <RiPlayListAddFill size={25} />
           </Button>
 
-          <Overlay 
-            show={categoryFormShow} 
-            target={target.current} 
-            placement="bottom" 
-            rootClose 
+          <Overlay
+            show={categoryFormShow}
+            target={target.current}
+            placement="bottom"
+            rootClose
             onHide={() => setCategoryFormShow(false)}
           >
             <Popover id="popover-contained">
-              <Popover.Title as="h3">Category</Popover.Title>
+              <Popover.Title as="h3">New Category</Popover.Title>
               <Popover.Content>
                 <Form.Group>
                   <Form.Control
                     type="text"
-                    placeholder="Category Name"
+                    placeholder="e.g. Appetizers"
                     value={categoryName}
                     onChange={(e) => setCategoryName(e.target.value)}
                   />
@@ -134,19 +133,19 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
                 </Button>
               </Popover.Content>
             </Popover>
-            
+
           </Overlay>
 
 
         </div>
       </Form.Group>
-    
-      {/* MENU ITEMS FORM */}
+
+      {/* Menu item fields */}
       <Form.Group>
         <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter Name"
+          placeholder="e.g. Margherita Pizza"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -155,7 +154,7 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
         <Form.Label>Price</Form.Label>
         <Form.Control
           type="number"
-          placeholder="Enter Price"
+          placeholder="0.00"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
@@ -164,7 +163,7 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
         <Form.Label>Description</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter Description"
+          placeholder="A short description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
@@ -176,17 +175,17 @@ const MenuItemForm = ({ place, onDone, item = {} }) => {
       <Form.Group>
         <Form.Check
           type="checkbox"
-          label="Is available?"
+          label="Available"
           checked={isAvailable}
           onChange={(e) => setIsAvailable(e.target.checked)}
         />
       </Form.Group>
-      <Button 
-        variant="standard" 
-        block 
+      <Button
+        variant="standard"
+        block
         onClick={ item.id ? onUpdateMenuItem : onAddMenuItems}
       >
-        { item.id ? "Update Menu Item" : "+ Add Menu Item" }
+        { item.id ? "Save Changes" : "+ Add Menu Item" }
       </Button>
     </div>
 

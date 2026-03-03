@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 
 import AuthContext from "../contexts/AuthContext";
 
+// Route wrapper — renders children if authenticated, otherwise redirects to /login
 function PrivateRoute({ children, ...rest }) {
   const auth = useContext(AuthContext);
 

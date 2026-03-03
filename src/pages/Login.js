@@ -6,6 +6,7 @@ import { signIn } from '../apis';
 import MainLayout from '../layouts/MainLayout';
 import AuthContext from '../contexts/AuthContext';
 
+// Login page — redirects to /places if the user already has a session
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +14,7 @@ const Login = () => {
   const history = useHistory();
   const auth = useContext(AuthContext);
 
+  // Skip login screen when user is already authenticated
   useEffect(() => {
     if (auth.token) {
       history.replace('/places');
@@ -30,33 +32,33 @@ const Login = () => {
           <Card>
             <Card.Body>
               <h3 className="text-center">
-                <b>LOGIN</b>
+                <b>Log In</b>
               </h3>
 
               <Form.Group>
                 <Form.Label>Username</Form.Label>
-                <Form.Control 
-                  type="text" 
-                  placeholder="Enter Username" 
-                  value={username} 
-                  onChange={(e) => setUsername(e.target.value)} 
+                <Form.Control
+                  type="text"
+                  placeholder="Your username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
 
               <Form.Group>
                 <Form.Label>Password</Form.Label>
-                <Form.Control 
-                  type="password" 
-                  placeholder="Enter Password" 
-                  value={password} 
-                  onChange={(e) => setPassword(e.target.value)} 
+                <Form.Control
+                  type="password"
+                  placeholder="Your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
 
               <Button variant="standard" block onClick={onClick} disabled={auth.loading}>
                 {
                   auth.loading ? (
-                    <Spinner 
+                    <Spinner
                       variant="standard"
                       as="span"
                       animation="border"

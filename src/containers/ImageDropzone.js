@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { uploadImage } from '../apis';
 
+// Dashed border box that accepts image files via drag-and-drop or click
 const Dropzone = styled.div`
   border: 1px dashed #ced4d9;
   border-radius: 5px;
@@ -18,12 +19,11 @@ const Dropzone = styled.div`
   }
 `;
 
+// Uploads a single image to Cloudinary, then passes the URL back via onChange
 function ImageDropzone({ value, onChange }) {
   const [loading, setLoading] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
-
     setLoading(true);
     uploadImage(acceptedFiles[0])
       .then((json) => onChange(json.url))
@@ -43,9 +43,9 @@ function ImageDropzone({ value, onChange }) {
         value ? (
           <img src={value} />
         ) : loading ? (
-          <Spinner variant="standard" animation="border" role="staus" />
+          <Spinner variant="standard" animation="border" role="status" />
         ) : (
-          <span>Drag & drop file here, or click to select file</span>
+          <span>Drop an image here, or click to browse</span>
         )
       }
     </Dropzone>

@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import MenuList from '../components/MenuList';
 import ShoppingCart from '../components/ShoppingCart';
 
+// Floating cart button pinned to bottom-right corner
 const OrderButton = styled(Button)`
   position: fixed;
   bottom: 20px;
@@ -18,6 +19,7 @@ const OrderButton = styled(Button)`
   height: 60px;
 `;
 
+// Customer-facing menu — what people see after scanning the QR code
 const Menu = () => {
   const [place, setPlace] = useState({});
   const [shoppingCart, setShoppingCart] = useState({});
@@ -27,12 +29,12 @@ const Menu = () => {
 
   const onFetchPlace = async () => {
     const json = await fetchPlace(params.id);
-    console.log(json);
     if (json) {
       setPlace(json);
     }
   };
 
+  // Add one more of this item to the cart (or start at 1)
   const onAddItemtoShoppingCart = (item) => {
     setShoppingCart({
       ...shoppingCart,
@@ -43,6 +45,7 @@ const Menu = () => {
     });
   }
 
+  // Remove one of this item — hides cart when the last item is removed
   const onRemoveItemToShoppingCart = (item) => {
     if (totalQuantity === 1) {
       setShowShoppingCart(false);
@@ -57,11 +60,13 @@ const Menu = () => {
     });
   }
 
+  // Clear everything after a successful payment
   const onPaymentDone = () => {
     setShoppingCart({});
     setShowShoppingCart(false);
   }
 
+  // Total number of items in the cart — drives the floating button badge
   const totalQuantity = useMemo(
     () => Object.keys(shoppingCart)
             .map((i) => shoppingCart[i].quantity)
@@ -78,7 +83,7 @@ const Menu = () => {
       <Row className="justify-content-center">
         <Col lg={8}>
           {showShoppingCart ? (
-            <ShoppingCart 
+            <ShoppingCart
               items={Object.keys(shoppingCart)
                 .map((key) => shoppingCart[key])
                 .filter((item) => item.quantity > 0)
@@ -89,22 +94,23 @@ const Menu = () => {
               color={place.color}
             />
           ) : (
-            <MenuList 
-              place={place} 
-              shoppingCart={shoppingCart} 
+            <MenuList
+              place={place}
+              shoppingCart={shoppingCart}
               onOrder={onAddItemtoShoppingCart}
-              color={place.color} 
+              color={place.color}
               font={place.font}
             />
           )}
-          
+
         </Col>
       </Row>
 
+      {/* Floating button: shows item count, or X to close cart */}
       {totalQuantity ? (
-        <OrderButton 
+        <OrderButton
           variant="standard"
-          style={{ backgroundColor: place.color }} 
+          style={{ backgroundColor: place.color }}
           onClick={() => setShowShoppingCart(!showShoppingCart)}>
           {showShoppingCart ? <IoCloseOutline size={25} /> : totalQuantity}
         </OrderButton>

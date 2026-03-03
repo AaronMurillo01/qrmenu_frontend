@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { BiEdit } from 'react-icons/bi';
 import { AiOutlineDelete } from 'react-icons/ai';
 
+// Card layout for a single menu item — image on the left, details on the right
 const Container = styled.div`
   border-radius: 5px;
   background-color: white;
@@ -23,6 +24,7 @@ const Container = styled.div`
   }
 `;
 
+// Renders a menu item card with optional edit/remove (admin) or order (customer) actions
 const MenuItem = ({ item, onEdit, onRemove, onOrder, color }) => (
   <Container active={item.is_available}>
     <Col xs={5} style={{ backgroundImage: `url(${item.image})` }} />
@@ -55,19 +57,19 @@ const MenuItem = ({ item, onEdit, onRemove, onOrder, color }) => (
           </h5>
 
           {onOrder ? (
-            <Button 
-              variant="standard" 
-              style={{ backgroundColor: color }} 
-              className="mt-2" 
-              size="sm" 
+            <Button
+              variant="standard"
+              style={{ backgroundColor: color }}
+              className="mt-2"
+              size="sm"
               onClick={() => onOrder(item)}
             >
-              {!item.quantity ? "Add to shopping cart" : `Add one more (${item.quantity})`}
+              {!item.quantity ? "Add to cart" : `Add another (${item.quantity})`}
             </Button>
           ) : null}
         </div>
 
-        {!item.is_available ? (<small className="text-secondary">Not Available</small>) : null}
+        {!item.is_available ? (<small className="text-secondary">Sold out</small>) : null}
 
       </div>
     </Col>

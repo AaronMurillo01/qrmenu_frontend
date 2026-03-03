@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 
 import AuthContext from '../contexts/AuthContext';
 
+// Shared layout — top navbar with auth-aware links, plus a centered content container
 const MainLayout = ({ children }) => {
   const history = useHistory();
   const auth = useContext(AuthContext);
@@ -29,21 +30,22 @@ const MainLayout = ({ children }) => {
     <>
       <Navbar bg="light" variant="light" className="mb-4">
         <Navbar.Brand href="/">QR Menu</Navbar.Brand>
-        
+
         <Nav>
           <Nav.Link onClick={goToPlaces}>Places</Nav.Link>
         </Nav>
-        
+
+        {/* Show Logout when signed in, Login/Register when signed out */}
         <Nav className="flex-grow-1 justify-content-end">
           {auth.token ? (
-            <Nav.Link onClick={onSignOut}>Logout</Nav.Link>
+            <Nav.Link onClick={onSignOut}>Log Out</Nav.Link>
           ) : (
             [
-              <Nav.Link key={1} onClick={onSignIn}>Login</Nav.Link>,
-              <Nav.Link key={2} onClick={onRegister}>Register</Nav.Link>
+              <Nav.Link key={1} onClick={onSignIn}>Log In</Nav.Link>,
+              <Nav.Link key={2} onClick={onRegister}>Sign Up</Nav.Link>
             ]
           )}
-          
+
         </Nav>
       </Navbar>
       <Container>
