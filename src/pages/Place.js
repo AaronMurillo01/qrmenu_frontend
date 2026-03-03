@@ -23,9 +23,24 @@ import QRCodeModal from '../components/QRCodeModal';
 // White card panel used for the sidebar form
 const Panel = styled.div`
   background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 1px 1px 10px rgba(0,0,0,0.05);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+`;
+
+// Quick action icon button — subtle hover highlight
+const ActionButton = styled(Button)`
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  transition: all 0.15s ease;
+  &:hover {
+    background-color: #f0f2f5;
+  }
 `;
 
 // Single place detail page — manage menu items, categories, QR codes, and orders
@@ -97,27 +112,31 @@ const Place = () => {
         <Col lg={12}>
           <div className="mb-4">
             {/* Top bar: back button, place name, delete */}
-            <div className="d-flex justify-content-between align-items-center mb-4">
-              <Button variant="link" onClick={onBack}>
-                <IoMdArrowBack size={25} color="black" />
-              </Button>
-              <h3 className="mb-0 ml-2 mr-2">{place.name}</h3>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <div className="d-flex align-items-center">
+                <Button variant="link" onClick={onBack}>
+                  <IoMdArrowBack size={25} color="#1a1a2e" />
+                </Button>
+                <h3 className="mb-0 ml-2" style={{ fontWeight: 900 }}>{place.name}</h3>
+              </div>
 
               <Button variant="link" onClick={onRemovePlace}>
-                <AiOutlineDelete size={25} color="red" />
+                <AiOutlineDelete size={22} color="#dc3545" />
               </Button>
             </div>
 
             {/* Quick action icons: QR codes, orders, settings */}
-            <Button variant="link" onClick={showQRModal}>
-              <AiOutlineQrcode size={25} />
-            </Button>
-            <Button variant="link" href={`/places/${params.id}/orders`}>
-              <RiFileList3Line size={25} />
-            </Button>
-            <Button variant="link" href={`/places/${params.id}/settings`}>
-              <FiSettings size={25} />
-            </Button>
+            <div className="d-flex mb-2">
+              <ActionButton variant="link" onClick={showQRModal}>
+                <AiOutlineQrcode size={22} />
+              </ActionButton>
+              <ActionButton variant="link" href={`/places/${params.id}/orders`}>
+                <RiFileList3Line size={22} />
+              </ActionButton>
+              <ActionButton variant="link" href={`/places/${params.id}/settings`}>
+                <FiSettings size={22} />
+              </ActionButton>
+            </div>
           </div>
         </Col>
 
@@ -137,7 +156,7 @@ const Place = () => {
                   <b>{category.name}</b>
                 </h4>
                 <Button variant="link" onClick={() => onRemoveCategory(category.id)}>
-                  <AiOutlineDelete size={25} color="red" />
+                  <AiOutlineDelete size={20} color="#dc3545" />
                 </Button>
               </div>
               {category.menu_items.map((item) => (
@@ -159,7 +178,7 @@ const Place = () => {
       {/* Edit modal — pops up when clicking the edit icon on a menu item */}
       <Modal show={menuItemFormShow} onHide={hideModal} centered>
         <Modal.Body>
-          <h4 className="text-center">Edit Menu Item</h4>
+          <h4 className="text-center mb-4" style={{ fontWeight: 700 }}>Edit Menu Item</h4>
           <MenuItemForm
             place={place}
             onDone={() => {

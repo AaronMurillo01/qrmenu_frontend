@@ -27,14 +27,14 @@ const Login = () => {
 
   return (
     <MainLayout>
-      <Row className="justify-content-center">
-        <Col lg={6} md={8}>
+      <Row className="justify-content-center" style={{ marginTop: '40px' }}>
+        <Col lg={5} md={7}>
+          <div className="text-center mb-4">
+            <h2 style={{ fontWeight: 900, color: '#1a1a2e' }}>Welcome back</h2>
+            <p style={{ color: '#6c757d' }}>Sign in to manage your menus</p>
+          </div>
           <Card>
-            <Card.Body>
-              <h3 className="text-center">
-                <b>Log In</b>
-              </h3>
-
+            <Card.Body style={{ padding: '32px' }}>
               <Form.Group>
                 <Form.Label>Username</Form.Label>
                 <Form.Control
@@ -55,7 +55,7 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <Button variant="standard" block onClick={onClick} disabled={auth.loading}>
+              <Button variant="standard" block onClick={onClick} disabled={auth.loading} className="mt-4">
                 {
                   auth.loading ? (
                     <Spinner
@@ -73,8 +73,10 @@ const Login = () => {
               </Button>
             </Card.Body>
           </Card>
+          <p className="text-center mt-3" style={{ color: '#6c757d', fontSize: '0.9rem' }}>
+            Don't have an account? <a href="/register" style={{ color: '#ff3366', fontWeight: 600 }}>Sign up</a>
+          </p>
         </Col>
-
       </Row>
     </MainLayout>
   )

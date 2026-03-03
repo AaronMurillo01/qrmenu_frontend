@@ -8,12 +8,9 @@ const QRCodeModal = ({ show, onHide, place, onUpdatePlace }) => (
   <Modal show={show} onHide={onHide} size="lg" centered>
     <Modal.Body className="text-center pt-4">
       <Container>
-        <h3>Table QR Codes</h3>
-        <div className="d-flex align-items-center mt-4 mb-4">
-          <h5 className="mb-0 mr-2">
-            Tables: <b>{place.number_of_tables}</b>
-          </h5>
-
+        <h3 style={{ fontWeight: 900 }}>Table QR Codes</h3>
+        <p style={{ color: '#6c757d', marginBottom: '24px' }}>Print or open QR codes for each table</p>
+        <div className="d-flex align-items-center justify-content-center mt-2 mb-4">
           <OperationButton
             variant="lightgray"
             size="sm"
@@ -21,6 +18,9 @@ const QRCodeModal = ({ show, onHide, place, onUpdatePlace }) => (
           >
             -
           </OperationButton>
+          <h5 className="mb-0 mx-3" style={{ fontWeight: 700 }}>
+            {place.number_of_tables} {place.number_of_tables === 1 ? 'table' : 'tables'}
+          </h5>
           <OperationButton
             variant="lightgray"
             size="sm"

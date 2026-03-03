@@ -28,7 +28,7 @@ const MainLayout = ({ children }) => {
 
   return (
     <>
-      <Navbar bg="light" variant="light" className="mb-4">
+      <Navbar variant="light" sticky="top" className="mb-4">
         <Navbar.Brand href="/">QR Menu</Navbar.Brand>
 
         <Nav>

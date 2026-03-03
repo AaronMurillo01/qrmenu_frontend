@@ -14,9 +14,9 @@ import MenuList from '../components/MenuList';
 // Sidebar panel styling
 const Panel = styled.div`
   background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 1px 1px 10px rgba(0,0,0,0.05);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
 `;
 
 // Customize menu appearance — pick a font and accent color with a live preview
@@ -59,9 +59,9 @@ const MenuSettings = () => {
     <MainLayout>
       <div className="d-flex align-items-center mb-4">
         <Button variant="link" onClick={onBack}>
-          <IoMdArrowBack size={25} color="black" />
+          <IoMdArrowBack size={25} color="#1a1a2e" />
         </Button>
-        <h3 className="mb-0 mr-2 ml-2">Menu Settings</h3>
+        <h3 className="mb-0 mr-2 ml-2" style={{ fontWeight: 900 }}>Menu Settings</h3>
       </div>
 
       <Row>

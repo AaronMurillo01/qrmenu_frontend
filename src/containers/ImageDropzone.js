@@ -7,15 +7,25 @@ import { uploadImage } from '../apis';
 
 // Dashed border box that accepts image files via drag-and-drop or click
 const Dropzone = styled.div`
-  border: 1px dashed #ced4d9;
-  border-radius: 5px;
+  border: 2px dashed #d0d5dd;
+  border-radius: 12px;
   color: #6c757d;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 142px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fafbfc;
+  &:hover {
+    border-color: #ff3366;
+    background-color: #fff5f8;
+    color: #ff3366;
+  }
   img {
-    height: 140px;
+    height: 138px;
+    border-radius: 10px;
+    object-fit: cover;
   }
 `;
 
@@ -45,7 +55,7 @@ function ImageDropzone({ value, onChange }) {
         ) : loading ? (
           <Spinner variant="standard" animation="border" role="status" />
         ) : (
-          <span>Drop an image here, or click to browse</span>
+          <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Drop an image here, or click to browse</span>
         )
       }
     </Dropzone>

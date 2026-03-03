@@ -44,10 +44,17 @@ const Orders = () => {
     <MainLayout>
       <div className="d-flex align-items-center mb-4">
         <Button variant="link" onClick={onBack}>
-          <IoMdArrowBack size={25} color="black" />
+          <IoMdArrowBack size={25} color="#1a1a2e" />
         </Button>
-        <h3 className="mb-0 ml-2 mr-2">Orders</h3>
+        <h3 className="mb-0 ml-2 mr-2" style={{ fontWeight: 900 }}>Orders</h3>
       </div>
+
+      {orders?.filter((order) => order.status === "processing").length === 0 && (
+        <div className="text-center" style={{ padding: '60px 0', color: '#a0a4b0' }}>
+          <p style={{ fontSize: '1.1rem', fontWeight: 500 }}>No orders right now</p>
+          <p style={{ fontSize: '0.9rem' }}>New orders will show up here automatically</p>
+        </div>
+      )}
 
       <Row className="justify-content-center">
         {orders

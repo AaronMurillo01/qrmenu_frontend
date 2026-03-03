@@ -24,7 +24,7 @@ const PlaceForm = ({ onDone }) => {
 
   return (
     <div>
-      <h4 className="text-center">New Place</h4>
+      <h4 className="text-center mb-4" style={{ fontWeight: 900 }}>New Place</h4>
       <Form.Group>
         <Form.Label>Name</Form.Label>
         <Form.Control

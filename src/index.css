@@ -1,50 +1,257 @@
+/* Google Fonts — Lato for body text, plus the fonts used in menu settings */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Teko:wght@400;700&family=Lobster&family=Caveat:wght@400;700&family=Indie+Flower&display=swap');
+
+/* ── Base ─────────────────────────────────────────────────────── */
+
 body {
-  background-color: #f2f2f2;
+  background-color: #f5f7fa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   font-family: "Lato", "Helvetica Neue", sans-serif;
 }
 
-.btn-standard {
+::selection {
   background-color: #ff3366;
   color: white;
 }
 
-.btn-standard:hover {
-  background-color: #fc285d;
-  color: white;
+/* ── Typography ───────────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #1a1a2e;
 }
 
+p {
+  color: #4a4a68;
+  line-height: 1.6;
+}
+
+/* ── Brand button ─────────────────────────────────────────────── */
+
+.btn-standard {
+  background-color: #ff3366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 10px 24px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(255, 51, 102, 0.25);
+}
+
+.btn-standard:hover {
+  background-color: #e6264f;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 51, 102, 0.35);
+}
+
+.btn-standard:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(255, 51, 102, 0.25);
+}
+
+.btn-standard:focus {
+  box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.3);
+}
+
+.btn-standard:disabled {
+  opacity: 0.65;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Light gray button ────────────────────────────────────────── */
+
 .btn-lightgray {
-  background-color: #f0f3f5;
-  color: black;
+  background-color: #f0f2f5;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.15s ease;
 }
 
 .btn-lightgray:hover {
-  background-color: #edeff0;
-  color: black;
+  background-color: #e4e7ec;
+  color: #1a1a2e;
 }
 
+/* ── Navbar ────────────────────────────────────────────────────── */
+
+.navbar {
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+  padding: 12px 24px;
+  background-color: white !important;
+}
+
+.navbar-brand {
+  font-weight: 900;
+  font-size: 1.4rem;
+  color: #ff3366 !important;
+  letter-spacing: -0.5px;
+}
+
+.navbar .nav-link {
+  font-weight: 600;
+  color: #4a4a68 !important;
+  transition: color 0.15s ease;
+  padding: 8px 16px !important;
+  border-radius: 6px;
+}
+
+.navbar .nav-link:hover {
+  color: #ff3366 !important;
+  background-color: #fff0f4;
+}
+
+/* ── Cards ─────────────────────────────────────────────────────── */
+
+.card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #f8f9fb;
+  border-bottom: 1px solid #eef0f4;
+  font-weight: 600;
+  padding: 14px 20px;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+/* ── Forms ─────────────────────────────────────────────────────── */
+
+.form-control {
+  border: 1.5px solid #dee2e8;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  color: #1a1a2e;
+}
+
+.form-control:focus {
+  border-color: #ff3366;
+  box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.12);
+}
+
+.form-control::placeholder {
+  color: #a0a4b0;
+}
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #4a4a68;
+  margin-bottom: 6px;
+}
+
+.form-check-label {
+  font-weight: 500;
+  color: #4a4a68;
+}
+
+.custom-select, select.form-control {
+  border-radius: 8px;
+  border: 1.5px solid #dee2e8;
+}
+
+/* ── Modals ────────────────────────────────────────────────────── */
+
+.modal-content {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modal-body {
+  padding: 32px;
+}
+
+/* ── Toasts ────────────────────────────────────────────────────── */
+
+.Toastify__toast {
+  border-radius: 10px !important;
+  font-family: "Lato", sans-serif !important;
+  font-weight: 500 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.Toastify__toast--success {
+  background-color: #00c851 !important;
+}
+
+.Toastify__toast--error {
+  background-color: #ff4444 !important;
+}
+
+/* ── Jumbotron (Home hero) ────────────────────────────────────── */
+
+.jumbotron {
+  border-radius: 16px;
+  padding: 60px 40px;
+  background: linear-gradient(135deg, #fff5f8 0%, #f5f7fa 100%) !important;
+}
+
+/* ── Stripe ────────────────────────────────────────────────────── */
+
 .StripeElement {
-  height: 38px;
-  padding: 10px 12px;
+  height: 42px;
+  padding: 12px 14px;
   width: 100%;
-  color: #32325d;
+  color: #1a1a2e;
   background-color: white;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  border: 1.5px solid #dee2e8;
+  border-radius: 8px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .StripeElement--focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #ff3366;
+  box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.12);
 }
 
 .StripeElement--invalid {
-  border-color: #fa755a;
+  border-color: #ff4444;
+  box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1);
 }
 
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+
+/* ── Misc polish ──────────────────────────────────────────────── */
+
+.btn-link {
+  color: #4a4a68;
+  transition: color 0.15s ease;
+}
+
+.btn-link:hover {
+  color: #ff3366;
+}
+
+hr {
+  border-top: 1px solid #eef0f4;
+}
+
+html {
+  scroll-behavior: smooth;
 }

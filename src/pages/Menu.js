@@ -11,12 +11,22 @@ import ShoppingCart from '../components/ShoppingCart';
 // Floating cart button pinned to bottom-right corner
 const OrderButton = styled(Button)`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 24px;
+  right: 24px;
   border-radius: 50%;
-  box-shadow: 1px 1px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(255, 51, 102, 0.35);
   width: 60px;
   height: 60px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(255, 51, 102, 0.45);
+  }
 `;
 
 // Customer-facing menu — what people see after scanning the QR code
@@ -79,7 +89,7 @@ const Menu = () => {
   }, []);
 
   return (
-    <Container className="mt-5 mb-5">
+    <Container className="mt-4 mb-5">
       <Row className="justify-content-center">
         <Col lg={8}>
           {showShoppingCart ? (
@@ -110,7 +120,7 @@ const Menu = () => {
       {totalQuantity ? (
         <OrderButton
           variant="standard"
-          style={{ backgroundColor: place.color }}
+          style={place.color ? { backgroundColor: place.color } : {}}
           onClick={() => setShowShoppingCart(!showShoppingCart)}>
           {showShoppingCart ? <IoCloseOutline size={25} /> : totalQuantity}
         </OrderButton>

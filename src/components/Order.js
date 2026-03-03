@@ -5,27 +5,41 @@ import React from 'react';
 const Order = ({ order, onComplete }) => {
   return (
     <Card className="mb-3">
-      <Card.Header className="d-flex justify-content-between">
-        <span>{`Order #${order.id} — Table ${order.table}`}</span>
-        <span><b>${order.amount}</b></span>
+      <Card.Header className="d-flex justify-content-between align-items-center">
+        <span style={{ fontWeight: 700, color: '#1a1a2e' }}>
+          {`Order #${order.id}`}
+          <span style={{ color: '#6c757d', fontWeight: 400, marginLeft: '8px' }}>
+            Table {order.table}
+          </span>
+        </span>
+        <span style={{ fontWeight: 900, color: '#1a1a2e', fontSize: '1.1rem' }}>${order.amount}</span>
       </Card.Header>
       <Card.Body className="d-flex justify-content-between">
         <div>
           {JSON.parse(order.detail).map((item) => (
-            <div className="mb-2" key={item.id}>
-              <span>x{item.quantity}</span>
+            <div className="mb-2 d-flex align-items-center" key={item.id}>
+              <span style={{
+                background: '#f0f2f5',
+                borderRadius: '6px',
+                padding: '2px 8px',
+                fontWeight: 700,
+                fontSize: '0.85rem',
+                marginRight: '10px'
+              }}>
+                x{item.quantity}
+              </span>
               <img
                 src={item.image}
-                width={30}
-                height={30}
-                style={{ borderRadius: 3, margin: "0 10px" }}
+                width={32}
+                height={32}
+                style={{ borderRadius: 6, marginRight: '10px', objectFit: 'cover' }}
               />
-              <span>{item.name}</span>
+              <span style={{ fontWeight: 500 }}>{item.name}</span>
             </div>
           ))}
         </div>
 
-        <div>
+        <div className="d-flex align-items-end">
           {onComplete ? (
             <Button variant="standard" size="md" onClick={onComplete}>
               Mark Done
